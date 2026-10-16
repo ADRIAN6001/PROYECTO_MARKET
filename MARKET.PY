@@ -1,6 +1,6 @@
 #regitro
-print("········BIENVENIDO AL SISTEMA ALCOLIC.INT······")
-name_licor=(input("·····INGRESE EL NOMBRE DE SU LICORERIA··········"))
+print("········BIENVENIDO AL SISTEMA MARKET······")
+name_licor=(input("·····INGRESE EL NOMBRE DE SU TIENDA··········"))
 usu=(input("····INGRESE EL NOMBRE DEL USUARIO·········"))
 print("···BIENVENIDO",usu.upper())
 con=1
