@@ -13,11 +13,9 @@ def venta():
         return
     if cantidad <= 0 or cantidad > producto["cantidad"]:
         print("Cantidad no válida o stock insuficiente")
-        return
-    
+        return 
     total = producto["precio"] * cantidad
     print("Total a pagar: Bs",total)
-
     try:
         pago = float(input("Monto recibido: Bs "))
     except ValueError:
