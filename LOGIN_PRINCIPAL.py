@@ -1,51 +1,70 @@
-usuarios_registrados={}
-name=(input("·····INGRESE EL NOMBRE DE SU MARKET··········"))
-def registro():
-    #regitro
-    print("········BIENVENIDO AL SISTEMA MARKET······")
-    name=(input("·····INGRESE EL NOMBRE DE SU TIENDA··········"))
-    usu=(input("····INGRESE EL NOMBRE DEL USUARIO·········"))
-    print("···BIENVENIDO",usu.upper())
-    con=1
-    while con<=3:
-        print(f"......intento" ,con, "de 3")   
-        contraseña=input(".......INGRESE UNA CONTRASEÑA DE 8 CARACTERES..........")
-        b=(len(contraseña))
-        if b>=8:
-            print("contraseña correcta su cuenta fue guardada")
-            usuarios_registrados[usu]=contraseña
-            break
+from definiciones import registro_de_productos, menu_inventario
+
+##base de datos de usuarios
+usuarios=[["admin1","admin123","administrador"],
+          ["kevin","12345","empleado"],
+          ["alejandrina","12345","empleado"],
+          ["adrian","12345","empleado"],
+          ["ruddy","12345","empleado"],]
+
+##variable para que el menu se mantenga visible hasta que se escoja salir
+mantener=True
+
+while mantener:
+    print("Mercado MARKET")
+    print("1.- iniciar sesion")
+    print("2.- salir")
+    opcion=input("Seleccione una opcion: ")
+
+    if opcion=="1":
+        ##para pedir usuario y contraseña
+        ingresar_usuario=input("Ingrese su usuario: ")
+        ingresar_contraseña=input("Ingrese su contraseña: ")
+
+        ##variable que se mantendra en falso hasta que se encuentre un usuario y contraseña correcto
+        login=False
+        ##variable vacia  que se llenara con el rol del usuario registrado
+        rol=""
+
+        ##for para recorrer la lista de usuarios y verificar si el usuario y contraseña ingresados son correctos
+        for usuario in usuarios:
+            if ingresar_usuario==usuario[0] and ingresar_contraseña==usuario[1]:
+                login=True
+                rol=usuario[2]
+                nombre_empleado=usuario[0]
+                break
+
+        if login:
+            print("Bienvenid@", nombre_empleado) 
+                
+            if rol=="administrador":
+                print("bienvenido", nombre_empleado)
+                print("""1.- registrar nuevo usuario" \
+                2.Registrar nuevo producto""")
+              
+                opcion_admin=input("Seleccione una opcion: ")
+
+                ##registro de nuevo empleado
+                if opcion_admin=="1":
+                    nuevo_usuario=input("ingrese nombre de nuevo empleado: ")
+                    nueva_contraseña=input("ingrese contraseña de nuevo empleado: ")
+                    ##usamos el append para añadir el nuevo usuario a la lista de usuarios
+                    usuarios.append([nuevo_usuario, nueva_contraseña, "empleado"])
+
+                    print("nuevo elemento añadido a las filas del gran Mercado MARKET")
+
+                ##para mostrar la lista de empleados
+                elif opcion_admin=="2":
+                    #aqui pondremos registro de pro
+                    menu_inventario()
+                    for usuario in usuarios:
+                        if usuario[2]=="empleado":
+                            print(usuario[0])
+
         else:
-            print("contraseña insegura")
-            con+=1
-#incio_de_sesion
-def inicio():
-    print(".........INICIO DE SESIÓN DEL SISTEMA......")
-    cont=1
-    while cont<=3:
-        t=input(".....INGRESE SU USUARIO.......")
-        v=input(".........INGRESE SU CONTRASEÑA........")
-        if t in usuarios_registrados and usuarios_registrados[t]==v:
-            print("....INICIO DE SESIÓN CORRECTA,SEA BIENVENIDO",t.upper(),"A",name.upper())
-            break
-        else:
-            print("...USUARIO O CONTRASEÑA INCORRECTA .....")
-            cont+=1
-#menu principal
-while True:
-    print(".......BIENVENIDO A MARKET........")
-    print("......SELECCIONE UNA OPCION........")
-    print("1.registro")
-    print("2.inicio de sesion")
-    print("3.salir")
-    opc=int(input(".....ingrese una opcion......"))
-    if opc==1:
-        registro()
-    elif opc==2:
-        inicio()
-        
-    elif opc==3:
-        print("saliendo del sistema muchas gracias por usar MARKET")
-        break
-    else:
-        print("......opcion invalida.......")
+             print("datos erroneos, vuelva a intentarlo")
+
+    elif opcion=="2":
+         mantener=False
+         print("gracias por su preferencia, vuelva pronto")
+         print("Mercado MARKET siempre esta observando")                         
