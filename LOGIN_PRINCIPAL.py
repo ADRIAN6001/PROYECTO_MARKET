@@ -1,3 +1,5 @@
+from definiciones import registro_de_productos, menu_inventario
+from ventas import venta
 ##base de datos de usuarios
 usuarios=[["admin1","admin123","administrador"],
           ["kevin","12345","empleado"],
@@ -37,8 +39,10 @@ while mantener:
                 
             if rol=="administrador":
                 print("bienvenido", nombre_empleado)
-                print("1.- registrar nuevo empleado")
-                print("2.- ver lista de empleados")
+                print("1.Registrar nuevo usuario")
+                print("2.Registrar nuevo producto")
+                print("3.ventas")
+              
                 opcion_admin=input("Seleccione una opcion: ")
 
                 ##registro de nuevo empleado
@@ -52,10 +56,15 @@ while mantener:
 
                 ##para mostrar la lista de empleados
                 elif opcion_admin=="2":
-                    print("lista de empleados:")
+                    #aqui pondremos registro de pro
+                    menu_inventario()
                     for usuario in usuarios:
                         if usuario[2]=="empleado":
                             print(usuario[0])
+                elif opcion_admin=="3":
+
+                    print("estas son las ventas")
+                    venta()
 
         else:
              print("datos erroneos, vuelva a intentarlo")
