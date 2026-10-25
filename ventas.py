@@ -1,4 +1,4 @@
-from definiciones import mostrar_productos, buscar_producto
+from DEFINICIONES import mostrar_productos, buscar_producto
 def venta():
     mostrar_productos()
     codigo = input("Código del producto: ")
