@@ -100,18 +100,55 @@ def modificar_producto():
 
     print("No se encontró ningún producto con ese código.")
 
+def eliminar_producto():
+    print("--- ELIMINAR PRODUCTO ---")
+    codigo = input("Ingrese el código del producto a eliminar: ").strip()
+    
+    for p in productos:
+        if p["codigo"] == codigo:
+            print(f"Producto encontrado: {p['nombre']}")
+            confirmacion = input("¿Está seguro de eliminarlo? (s/n): ").strip().lower()
+            if confirmacion == 's':
+                productos.remove(p)
+                print("Producto eliminado exitosamente.")
+            else:
+                print("Operación cancelada.")
+            return
+
+    print("No se encontró ningún producto con ese código.")
+def valor_total_inventario():
+    print("--- VALOR TOTAL DEL INVENTARIO ---")
+    if not productos:
+        print("El inventario está vacío.")
+        return
+    
+    total = sum(p["precio"] * p["cantidad"] for p in productos)
+    print(f"El valor total de la mercancía en stock es: Bs. {total:.2f}")
+
+def alerta_stock_bajo():
+    print("--- PRODUCTOS CON STOCK BAJO (< 5 unidades) ---")
+    limite = 5
+    bajos = [p for p in productos if p["cantidad"] < limite]
+    
+    if not bajos:
+        print(" No hay productos con stock bajo.")
+        return
+
+    for p in bajos:
+        print(f" Cód: {p['codigo']} | Nombre: {p['nombre']} | Cantidad restante: {p['cantidad']}")
+
+
 def menu_inventario():
     while True:
-        print("\n" + "=" * 35)
-        print("         MENÚ DE INVENTARIO")
-        print("=" * 35)
-        
+        print("--- MENÚ DE INVENTARIO ---")
         print("1. Registrar producto")
         print("2. Mostrar lista de productos")
         print("3. Buscar producto")
         print("4. Modificar datos de producto")
-        print("5. Volver / Salir")
-        print("=" * 35)
+        print("5. Eliminar producto")         
+        print("6. Ver alertas de stock bajo")   
+        print("7. Ver valor total del inventario")
+        print("8. Salir")
         
         opcion = input("Seleccione una opción: ").strip()
         
@@ -124,11 +161,16 @@ def menu_inventario():
         elif opcion == "4":
             modificar_producto()
         elif opcion == "5":
+            eliminar_producto()
+        elif opcion == "6":
+            alerta_stock_bajo()
+        elif opcion == "7":
+            valor_total_inventario()
+        elif opcion == "8":
             print("Saliendo del módulo de inventario...")
             break
         else:
             print("Opción no válida. Intente de nuevo.")
-
 if __name__ == "__main__":
     menu_inventario()
    
