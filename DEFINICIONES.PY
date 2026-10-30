@@ -1,16 +1,18 @@
-#aqui se guardaran todos los  productos
+# Aqui se guardaran todos los  productos
 productos=[]
 
 
 
-#aqui registramos nuevos productos
+# Aqui registramos nuevos productos
 def registro_de_productos():
-    print("""REGISTRO DE NUEVOS PRODUCTOS""")
+    print("\n" + "=" * 40)
+    print("         REGISTRO DE NUEVOS PRODUCTOS")
+    print("\n" + "=" * 40)
     codigo = input("Ingrese el código del producto: ").strip()
     
     # Verificar si el código ya existe en codigo
     for p in productos:
-        #p es una simple variable
+        # p es una simple variable
         if p["codigo"] == codigo:
             print("Error: Ya existe un producto con ese código")
             return
@@ -22,7 +24,7 @@ def registro_de_productos():
     except ValueError:
         print("Error: Precio y cantidad deben ser valores numéricos válidos.")
         return
-#diccionario donde se guardan todos los productos
+# Diccionario donde se guardan todos los productos
     nuevo_producto = {
         "codigo": codigo,
         "nombre": nombre,
@@ -34,17 +36,22 @@ def registro_de_productos():
     print(f"Producto '{nombre}' registrado exitosamente.")
 
 def mostrar_productos():
-    print("LISTA DE PRODUCTOS")
+    print("\n" + "=" * 40)
+    print("          LISTA DE PRODUCTOS")
+    print("=" * 40)
     if not productos:
         print("No hay productos registrados en el inventario.")
+        print("=" * 40)
         return
 
     for p in productos:
         print(f" Código: {p['codigo']}  Nombre: {p['nombre']}  Precio: Bs. {p['precio']}  Cantidad: {p['cantidad']}")
-
+    print("=" * 40)
 
 def buscar_producto():
-    print("BUSCAR PRODUCTO ")
+    print("\n" + "=" * 40)
+    print("            BUSCAR PRODUCTO")
+    print("=" * 40)
     criterio = input("Ingrese el código o nombre a buscar: ").strip().lower()
     
     encontrados = [
@@ -54,12 +61,17 @@ def buscar_producto():
 
     if encontrados:
         print(f"Se encontraron {len(encontrados)} coincidencia(s):")
+        print("-" * 40)
         for p in encontrados:
             print(f"Código: {p['codigo']}  Nombre: {p['nombre']}  Precio: Bs. {p['precio']} | Cantidad: {p['cantidad']}")
+            print("-" * 40)
     else:
         print("No se encontraron productos con ese criterio.")
+
 def modificar_producto():
-    print("MODIFICAR PRODUCTO ")
+    print("\n" + "=" * 40)
+    print("           MODIFICAR PRODUCTO")
+    print("=" * 40)
     codigo = input("Ingrese el código del producto a modificar: ").strip()
     
     for p in productos:
@@ -90,14 +102,16 @@ def modificar_producto():
 
 def menu_inventario():
     while True:
-    
-        print("    MENÚ DE INVENTARIO")
+        print("\n" + "=" * 35)
+        print("         MENÚ DE INVENTARIO")
+        print("=" * 35)
         
         print("1. Registrar producto")
         print("2. Mostrar lista de productos")
         print("3. Buscar producto")
         print("4. Modificar datos de producto")
         print("5. Volver / Salir")
+        print("=" * 35)
         
         opcion = input("Seleccione una opción: ").strip()
         
