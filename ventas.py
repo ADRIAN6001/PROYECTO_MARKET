@@ -27,5 +27,15 @@ def venta():
     producto["cantidad"] -= cantidad
     cambio= pago -total
     print("Venta realizada correctamente")
-    print("Cambio: Bs", cambio)
-    
+    print(" ")
+    print("---COMPROBANTE DE LA VENTA ---")
+    print(f"Codigo: {codigo}")
+    print(f"Producto: {producto}")
+    print(f"Cantidad: {cantidad}")
+    print(f"Precion unitario : {producto} bs")
+    print(f"Total en bs. : {total}")
+    print(f"Pago en bs.: {pago}")
+    print(f"Cambio en bs. : {cambio}")
+    print("------GRACIAS POR SU COMPRA----")
+
+    venta()
