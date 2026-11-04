@@ -1,6 +1,7 @@
 from DEFINICIONES import mostrar_productos, obtener_producto_por_codigo
 
 ## bucle para el modulo de ventas
+ventas=[]
 def venta():
     while True:
         print("\n" + "=" * 40)
@@ -79,3 +80,19 @@ def venta():
             print("========================================")
         else:
             print("Opcion no valida. Intente de nuevo.")
+
+            ventas.append({
+                "codigo": codigo,
+                "cantidad": cantidad,
+                "total": total
+            })
+            if producto["cantidad"] <= 5:
+                print("Advertencia: Quedan pocos productos en stock")
+
+def mostrar_ventas():
+    print("\n===== HISTORIAL DE VENTAS =====")
+
+    for venta in ventas:
+        print("Codigo:", venta["codigo"])
+        print("Cantidad:", venta["cantidad"])
+        print("Total: Bs", venta["total"])
