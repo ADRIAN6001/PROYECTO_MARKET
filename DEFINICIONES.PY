@@ -8,13 +8,14 @@ def registro_de_productos():
     print("\n" + "=" * 40)
     print("         REGISTRO DE NUEVOS PRODUCTOS")
     print("\n" + "=" * 40)
-    codigo = input("Ingrese el código del producto: ").strip()
+    codigo = input("Ingrese el codigo del producto: ").strip()
     
-    # Verificar si el código ya existe en codigo
+    # Verificar si el codigo ya existe en codigo
     for p in productos:
+
         # p es una simple variable
         if p["codigo"] == codigo:
-            print("Error: Ya existe un producto con ese código")
+            print("Error: Ya existe un producto con ese codigo")
             return
 
     nombre = input("Ingrese el nombre del producto: ").strip()
@@ -22,7 +23,7 @@ def registro_de_productos():
         precio = float(input("Ingrese el precio: "))
         cantidad = int(input("Ingrese la cantidad (existencias): "))
     except ValueError:
-        print("Error: Precio y cantidad deben ser valores numéricos válidos.")
+        print("Error: Precio y cantidad deben ser valores numericos validos.")
         return
 # Diccionario donde se guardan todos los productos
     nuevo_producto = {
@@ -52,7 +53,7 @@ def buscar_producto():
     print("\n" + "=" * 40)
     print("            BUSCAR PRODUCTO")
     print("=" * 40)
-    criterio = input("Ingrese el código o nombre a buscar: ").strip().lower()
+    criterio = input("Ingrese el codigo o nombre a buscar: ").strip().lower()
     
     encontrados = [
         p for p in productos 
@@ -88,12 +89,12 @@ def modificar_producto():
                 try:
                     p["precio"] = float(nuevo_precio)
                 except ValueError:
-                    print("Precio no válido, se mantiene el anterior.")
+                    print("Precio no valido, se mantiene el anterior.")
             if nueva_cantidad:
                 try:
                     p["cantidad"] = int(nueva_cantidad)
                 except ValueError:
-                    print("Cantidad no válida, se mantiene la anterior.")
+                    print("Cantidad no valida, se mantiene la anterior.")
             
             print("Producto actualizado correctamente.")
             return
@@ -102,24 +103,24 @@ def modificar_producto():
 
 def eliminar_producto():
     print("--- ELIMINAR PRODUCTO ---")
-    codigo = input("Ingrese el código del producto a eliminar: ").strip()
+    codigo = input("Ingrese el codigo del producto a eliminar: ").strip()
     
     for p in productos:
         if p["codigo"] == codigo:
             print(f"Producto encontrado: {p['nombre']}")
-            confirmacion = input("¿Está seguro de eliminarlo? (s/n): ").strip().lower()
+            confirmacion = input("¿Esta seguro de eliminarlo? (s/n): ").strip().lower()
             if confirmacion == 's':
                 productos.remove(p)
                 print("Producto eliminado exitosamente.")
             else:
-                print("Operación cancelada.")
+                print("Operacion cancelada.")
             return
 
-    print("No se encontró ningún producto con ese código.")
+    print("No se encontro ningun producto con ese codigo.")
 def valor_total_inventario():
     print("--- VALOR TOTAL DEL INVENTARIO ---")
     if not productos:
-        print("El inventario está vacío.")
+        print("El inventario esta vacio.")
         return
     
     total = sum(p["precio"] * p["cantidad"] for p in productos)
@@ -140,7 +141,7 @@ def alerta_stock_bajo():
 
 def menu_inventario():
     while True:
-        print("--- MENÚ DE INVENTARIO ---")
+        print("--- MENU DE INVENTARIO ---")
         print("1. Registrar producto")
         print("2. Mostrar lista de productos")
         print("3. Buscar producto")
@@ -150,7 +151,7 @@ def menu_inventario():
         print("7. Ver valor total del inventario")
         print("8. Salir")
         
-        opcion = input("Seleccione una opción: ").strip()
+        opcion = input("Seleccione una opcion: ").strip()
         
         if opcion == "1":
             registro_de_productos()
@@ -167,10 +168,15 @@ def menu_inventario():
         elif opcion == "7":
             valor_total_inventario()
         elif opcion == "8":
-            print("Saliendo del módulo de inventario...")
+            print("Saliendo del modulo de inventario...")
             break
         else:
-            print("Opción no válida. Intente de nuevo.")
+            print("Opcion no valida. Intente de nuevo.")
 if __name__ == "__main__":
     menu_inventario()
-   
+
+def obtener_producto_por_codigo(codigo):
+    for p in productos:
+        if p["codigo"] == codigo:
+            return p
+    return None

@@ -1,58 +1,81 @@
-from DEFINICIONES import mostrar_productos, buscar_producto
+from DEFINICIONES import mostrar_productos, obtener_producto_por_codigo
 
+## bucle para el modulo de ventas
 def venta():
-    print("\n" + "=" * 40)
-    print("          MÓDULO DE VENTAS          ")
-    print("=" * 40)
+    while True:
+        print("\n" + "=" * 40)
+        print("          MODULO DE VENTAS          ")
+        print("=" * 40)
+        print("1. Realizar una venta")
+        print("2. Volver al menu principal")
+        print("=" * 40)
+        
+        opcion = input("Seleccione una opcion: ").strip()
+        
+        if opcion == "2":
+            print("Saliendo del modulo de ventas...")
 
-    mostrar_productos()
-    codigo = input("\nIngrese el código del producto: ")
+            ## cierra el bucle y vuelve al menu principal
+            break
+            
+        elif opcion == "1":
+            mostrar_productos()
+            codigo = input("\nIngrese el codigo del producto: ").strip()
 
-    producto = buscar_producto(codigo)
-    if producto is None:
-        print("Producto no encontrado")
-        return
-    
-    try:
-        cantidad = int(input("Cantidad: "))
-    except ValueError:
-        print("Ingrese un número entero")
-        return
-    
-    if cantidad <= 0 or cantidad > producto["cantidad"]:
-        print("Cantidad no válida o stock insuficiente")
-        return 
-    total = producto["precio"] * cantidad
-    print("Total a pagar: Bs",total)
+            ## obtiene el producto por su codigo
+            producto = obtener_producto_por_codigo(codigo)
+            
+            if producto is None:
+                print("Producto no encontrado")
+                continue
 
-    try:
-        pago = float(input("Monto recibido: Bs "))
-    except ValueError:
-        print("Ingrese un monto válido")
-        return
-    
-    if pago < total:
-        print("Pago insuficiente")
-        return
-    
-    producto["cantidad"] -= cantidad
-    cambio= pago - total
-    print("Venta realizada correctamente")
-    
-    print("\n========================================")
-    print("          COMPROBANTE DE VENTA          ")
-    print("========================================")
+            ## valida que el numero ingresado sea entero
+            try:
+                cantidad = int(input("Cantidad a vender: "))
+            except ValueError:
+                print("Ingrese un numero entero valido")
+                continue
 
-    print(f"Codigo: {codigo}")
-    print(f"Producto: {producto}")
-    print(f"Cantidad: {cantidad}")
-    print(f"Precion unitario : {producto} bs")
-    print(f"Total en bs. : {total}")
-    print(f"Pago en bs.: {pago}")
-    print(f"Cambio en bs. : {cambio}")
+            ## validacion en cuanto a numero positivo y stock disponible
+            if cantidad <= 0 or cantidad > producto["cantidad"]:
+                print("Cantidad no valida o stock insuficiente")
+                continue 
+                
+            total = producto["precio"] * cantidad
+            print("Total a pagar: Bs. ", total)
 
-    print("\n========================================")
-    print("       ¡Gracias por su compra!          ")
-    print("========================================")
+            ##valida que el monto ingresado sea real
+            try:
+                pago = float(input("Monto recibido: Bs. "))
+            except ValueError:
+                print("Ingrese un monto numerico valido")
+                continue
 
-    venta()
+            ## valida que el pago sea suficiente
+            if pago < total:
+                print("Pago insuficiente. Venta cancelada.")
+                continue
+
+            ## actualiza la cantidad del producto en el inventario y calcula el cambio
+            producto["cantidad"] -= cantidad
+            cambio = pago - total
+            print("Venta realizada correctamente")
+
+            ## muestra el comprobante de venta
+            print("\n========================================")
+            print("          COMPROBANTE DE VENTA          ")
+            print("========================================")
+
+            print("Codigo: ", codigo)
+            print("Producto: ", producto["nombre"])
+            print("Cantidad: ", cantidad)
+            print("Precio unitario: Bs. ", producto["precio"])
+            print("Total en Bs.: ", total)
+            print("Pago en Bs.: ", pago)
+            print("Cambio en Bs.: ", cambio)
+
+            print("\n========================================")
+            print("       Gracias por su compra!          ")
+            print("========================================")
+        else:
+            print("Opcion no valida. Intente de nuevo.")
