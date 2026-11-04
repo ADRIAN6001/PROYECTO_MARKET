@@ -1,4 +1,4 @@
-from DEFINICIONES import menu_inventario
+from inventario import menu_inventario
 from ventas import venta
 import usuario 
 
@@ -35,7 +35,7 @@ def ejecutar_menu_admin():
             if usuario_repetido:
                 print("\nERROR")
                 print("Este nombre de usuario ya existe en el sistema. Intente con otro.")
-
+            
             ## asignacion de rol con contraseña   
             else:
                 print("\nSeleccione el rol para el nuevo usuario:")
@@ -50,7 +50,7 @@ def ejecutar_menu_admin():
 
                 nueva_contraseña = input("Ingrese la contraseña: ")
 
-                ## asigna los datos del nuevo usaurio en un diccionario
+                # asigna los datos del nuevo usaurio en un diccionario
                 nuevo_usuario_añadido = {
                     "usuario": nuevo_usuario,
                     "contraseña": nueva_contraseña,
@@ -61,7 +61,7 @@ def ejecutar_menu_admin():
                 usuario.usuarios.append(nuevo_usuario_añadido)
                 print("Nuevo usuario añadido exitosamente.")
 
-    ## elimina un usuario a peticion
+    # elimina un usuario a peticion
     elif opcion_admin == "2":
         usuario_a_borrar = input("Ingrese el nombre del usuario que desea eliminar: ").strip()
         usuario_encontrado = None
@@ -70,13 +70,13 @@ def ejecutar_menu_admin():
                 usuario_encontrado = u
                 break
 
-        ## evita que se elimine al administrador principal
+        # evita que se elimine al administrador principal
         if usuario_encontrado != None:
             if usuario_encontrado["usuario"] == "admin":
                 print("\nALERTA")
                 print("No puedes eliminar al administrador principal del sistema.")
 
-            ## elimina al usaurio de la lista de usuarios    
+            # elimina al usaurio de la lista de usuarios    
             else:
                 usuario.usuarios.remove(usuario_encontrado)
                 print("El usuario ha sido eliminado correctamente.")
@@ -84,16 +84,16 @@ def ejecutar_menu_admin():
             print("\nERROR")
             print("El usuario especificado no existe.")
 
-    ## abre el menu de inventario
+    # abre el menu de inventario
     elif opcion_admin == "3":
         menu_inventario()
 
-    ## abre el modulo de ventas    
+    # abre el modulo de ventas    
     elif opcion_admin == "4":
         print("Estas son las ventas")
         venta()
 
-    ##  muestra la lista de empleados registrados    
+    #  muestra la lista de empleados registrados    
     elif opcion_admin == "5":
         print("\n" + "-" * 25)
         print("\nLista de empleados")

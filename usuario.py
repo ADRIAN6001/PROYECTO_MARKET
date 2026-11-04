@@ -1,4 +1,4 @@
-from DEFINICIONES import menu_inventario
+from inventario import menu_inventario
 from ventas import venta
 
 ## lista de usaurios

@@ -1,4 +1,4 @@
-from DEFINICIONES import mostrar_productos, obtener_producto_por_codigo
+from inventario import mostrar_productos, obtener_producto_por_codigo
 
 ## bucle para el modulo de ventas
 ventas=[]
