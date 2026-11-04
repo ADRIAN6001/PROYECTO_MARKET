@@ -1,8 +1,6 @@
 # Aqui se guardaran todos los  productos
 productos=[]
 
-
-
 # Aqui registramos nuevos productos
 def registro_de_productos():
     print("\n" + "=" * 40)
