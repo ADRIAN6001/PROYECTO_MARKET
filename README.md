@@ -25,3 +25,8 @@ REGISTRO DE PRODUCTOS Y ADMINITRACION DE STOCK.
 +
 4.RUDDY
 HACER NADA:
+
+
+LIBRERIAS USADAS EN EL PROYECTO
+para la impreasora:pip install python-escpos pywin32
+
